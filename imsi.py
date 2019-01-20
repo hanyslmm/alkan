@@ -6,11 +6,11 @@ import pandas as pd
 
 
 # read csv file to create DataFrame sheet
-sheet = pd.read_csv('/Users/macbookpro/projects/alkan/sheet.csv')
+sheet = pd.read_csv(r'C:\Users\hany.msalama\alkan\probeimsi.csv')
 
 print (sheet)
 booleans = []
-for imsi in sheet.Imsi:
+for imsi in sheet.IMSI:
     # if isinstance(int(imsi), int):
     if pd.isnull(imsi):
         booleans.append(False)
