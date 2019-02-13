@@ -1,0 +1,204 @@
+/*
+Template file for sctpImport utility
+
+Copy this template file, and make changes as needed to the copy, to add network
+objects using sctpImport.  This file is divided into sections, each starting
+with <a_name> and ending with </a_name>.
+
+All sections except the <sctpimport> section are optional, and may be repeated.
+The <sctpimport> section must be the first section (do not put any section in
+front of it). Comment out or delete all sections that you do not want.  Inside
+of each section that you want, you only have to provide the required attri-
+butes, by supplying the name and value separated by an "=" sign.  For example,
+in the <phydevice> section, you might enter name=samplePhyDevice. 
+
+All sections also have an optional attributes part. To use it, uncomment
+(remove the "#" sign) from any attribute that you want to use, and enter the
+desired value.  All the required attributes in the <ss7import> section have
+already been filled in, so you can leave it alone, unless you want to use its
+optional attributes. 
+
+After you have copied this file and made your desired changes, it's a good idea
+to run sctpImport in Check mode to look for errors in your file.
+    o Check mode
+      Check mode does not write to the database; it just indicates any errors
+      in the file, and what it would do if it were in Create or Update mode.
+      To run in Check mode, enter "sctpImport -m 2 your_input_file".
+    o Create mode
+      Create mode only creates; it does not change existing objects.
+      If an element already exists in the database, but is not on the map,
+      the object will be added to the map.
+      To run in Create mode, enter "sctpImport -m 0 your_input_file".
+    o Update mode
+      Update mode includes Create mode functionality, plus it updates existing
+      objects, if the object is already on the map.  If the object is not on
+      the map, the object will be added to the map, and any applicable attri-
+      bute updates will be performed as well.
+      To run in update mode, enter "sctpImport -m 1 your_input_file".
+
+It is okay to add to the file and reuse it.  If you are in Create mode,
+sctpImport will just add the new objects and report the existing ones. If you
+are in Update mode, sctpImport will add the new objects and update the existing
+ones with the same data (*IF* you have not changed it: be careful here).  
+
+General Rules
+
+    1) Comments can be single line (beginning with the # character), or
+       multi-line
+       (like this block of text, using C++-style comment delimiters)
+    2) Whitespace (tabs, newlines, spaces) will be ignored unless bounded by
+       double quotation marks (").
+    3) An <sctpimport> section must be defined at the beginning of each input
+       file, and must include at least the version attribute (current version
+       is 1)
+    4) All tags and attribute names MUST be lower-case
+    5) All sections must begin with a begin tag (<sectionname>) and end with
+       an end tag (</sectionname>)
+    6) Attribute/value pairs must follow one of these two formats:
+       attribute=value or attribute="value with more than one word"
+    7) Values for text attributes may be surrounded by double quotes, but this 
+       is not required unless the value has embedded spaces (for example, 
+       attribute="value" would be recognized if input as attribute=value, but
+       attribute="value 1" would generate an error if input as
+       attribute=value 1)
+    9) In general, if a network element exists with the same name as an
+       included element, its database entries will be updated if in destruc-
+       tive (Update) mode
+
+    Here is a short example showing how to create 2 phyDevices, 2 Layer2s, 
+    2 endpoints, 1 association; a complete template follows in the remainder
+    of this file, listing all the attributes defined for each tag:
+    <sctpimport>
+        version=1
+    </sctpimport>
+    <phydevice>
+        name=sctpPD2
+        probename=atca11
+        type=3
+        deviceinfo=0.1.0.2+0.1.1.2
+    </phydevice>
+    <phydevice>
+        name=sctpPd1
+        probename=atca11
+        type=3
+        deviceinfo=0.1.0.1+0.1.1.1
+    </phydevice>
+
+    <layer2>
+        name=sctpL2
+        type=Ethernet
+        phydevicename=sctpPd1
+        vlanid1=0xFFFF
+        vlanid2=0xFFFF
+    </layer2>
+    <layer2>
+        name=sctpL2-2
+        type=Ethernet
+        phydevicename=sctpPD2
+        vlanid1=0xFFFF
+        vlanid2=0xFFFF
+    </layer2>
+    <endpoint>
+        name=ImportTest1
+        port=290
+        ipaddrlist=10.10.10.1
+	ipV6Addrlist=ff11:ff12:ff13:ff14:ff15:ff16:ff17:1
+    </endpoint>
+    <endpoint>
+        name=ImportTest2
+        port=291
+	ipV6Addrlist=111::114
+        ipaddrlist=11.12.13.15
+    </endpoint>
+    <association>
+        name=TestImport
+        sourceendpointname=ImportTest1
+        destinationendpointname=ImportTest2
+        layer2list=sctpL2
+        layer2list=sctpL2-2
+        description="For SigtranImport Association Test"
+    </association>
+
+Refer to the comments in this file or the user manuals for other information
+*/
+
+#-------------------------------------------------------------------------------
+
+#sctpimport section
+#
+#The <sctpimport> section is required, and must come before any other sections.
+<sctpimport>
+  #required attributes
+    version=1             #version should always be set to 1
+</sctpimport>
+
+#-------------------------------------------------------------------------------
+# physical Device configuration section
+# The physical device configurations are used by Layer2s, so if the
+# physical devices you are using for an Layer2 are defined in the same
+# file, make sure they come BEFORE the Layer2
+
+<phydevice>
+    #required attributes
+      name=             #must be unique
+      probename=        #name (NOT hostname) of the monitoring device
+      type=             #device type (3=Ocelot, 4=12UProbe)
+      deviceinfo=       #deviceinfo string
+                                # --for device type =Ocelot (or LP1000)
+                                #   the format is 'TxDeviceInfo+RxDeviceInfo' where DeviceInfo
+                                #   is in the format "cage[0-63].slot[0-31].pmc[0-4].line[0-95]".
+                                #   You should have at least one DeviceInfo input and must have '+' included.
+                                #
+                                # --for device type =12UProbe
+                                #   the format is "cage[1-8].slot[3-18]"
+</phydevice>
+
+
+# Layer 2 Configuration Section
+# The Layer 2 Configurations are used by the Associations, so if the
+# layer2s you're using for an association are defined in the same
+# input file, make sure they come BEFORE the association
+<layer2>
+#required attributes
+        #name=                  #no default, will cause failure if not specified
+        #type=                  #should be one of: ATM OR Ethernet
+        #phydevicename=         #name of physical device monitoring this interface
+
+#type-specific attributes (should definitely be included)
+        #vci1=                  #VCI range minimum: only for ATM
+        #vci2=                  #VCI range maximum: only for ATM
+        #vpi1=                  #VPI range minimum: only for ATM
+        #vpi2=                  #VPI range maximum: only for ATM
+
+        #vlanid1=               #VLAN range minimum: only for Ethernet
+        #vlanid2=               #VLAN range maximum: only for Ethernet
+</layer2>
+
+# EndPoint Configuration Section
+# The EndPoint Configurations are used by the Associations, so if the
+# EndPoints you're using for an association are defined in the same
+# input file, make sure they come BEFORE the association
+<endpoint>
+#required attributes
+        #name=                  #no default, will cause failure if not specified
+        #port=                  #port number
+        #ipaddrlist=            #IPv4 address entries. ONE IPv4 addres per ipaddrlist
+                                #  entry. if multiple IP address, use multiple 
+                                #  ipaddrlist entries
+        #ipV6Addrlist=          #IPv6 address entries. ONE IPv6 addres per ipV6Addrlist
+                                #  entry. if multiple IP address, use multiple 
+                                #  ipV6Addrlist entries
+</endpoint>
+
+# Association Configuration Section
+<association>
+#required attributes
+        #name=                  #no default, will cause failure if not specified
+        #sourceendpointname=    #source EndPoint name
+        #destinationendpointname= #destination EndPoint name
+        #layer2list=            #Layer2 entries. ONE Layer2 per layer2list
+                                #  entry. if multiple Layer2, use multiple
+                                #  layer2list entries
+                                #  Layer2s should be same type and from same probe
+                                # For 12U Layer2, should be only ONE layer2list entries
+</association>
