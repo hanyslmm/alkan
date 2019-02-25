@@ -1,0 +1,147 @@
+geo@Hosary-damascus-1-1: ~/dailyChecks $ cat 25-02-2019-Hosary-damascus-1-1
+1# check file system efficiency
+-----------------------
+Filesystem            Size  Used Avail Use% Mounted on
+rootfs                7.3G  1.7G  5.2G  25% /
+/dev/sda2             7.3G  1.7G  5.2G  25% /
+none                   10M  208K  9.8M   3% /dev
+none                  2.0G   12K  2.0G   1% /tmp
+none                  2.0G   84K  2.0G   1% /local-blade
+none                  2.0G   20K  2.0G   1% /mnt/initramfs
+tmpfs                 2.0G     0  2.0G   0% /lib/init/rw
+tmpfs                 2.0G     0  2.0G   0% /dev/shm
+/dev/sda3              30G   13G   16G  44% /.dfs
+/dev/sda3              30G   13G   16G  44% /inet
+/dev/sda6              31G  4.2G   25G  15% /SimScsi
+-----------------------
+2# uptime for Hosary-damascus-1-1
+ 10:58:18 up 68 days, 23:16,  1 user,  load average: 0.06, 0.24, 0.35
+-----------------------
+3# check Ocelots stats for Hosary-damascus-1-1
+
+ADDR     Type     Timing     Project      AllReady
+01.14    Ocelot   Driver-P   hdlcTdm/hdlcTdm UP
+02.12    Ocelot   Listener   ipGbe/ipGbe  UP
+02.14    Ocelot   Slave-P    hdlcTdm/hdlcTdm UP
+03.12    Ocelot   Listener   hdlcTdm/hdlcTdm UP
+03.14    Ocelot   Slave-P    ipGbe/ipGbe  UP
+
+-----------------------
+4# show down tasks in probe Hosary-damascus-1-1
+AppName                     StartTime             Dest Addr                           Ex Up Stat MaxT Left   Pid
+--------------------------- --------------------- ----------------------------------- -- -- ---- ---- ---- -----
+-----------------------
+-----------------------
+6# RUN suds log analyzer for Hosary-damascus-1-1
+Starting SUDS log file analyzer.......
+Creating Suds Log Report........
+Total 192 rows are ignored due to error or 0 values
+File SudsStats.20190223.log is opened
+Total 192 rows are ignored due to error or 0 values
+File SudsStats.20190224.log is opened
+Total 192 rows are ignored due to error or 0 values
+File SudsStats.20190222.log is opened
+Total 192 rows are ignored due to error or 0 values
+File SudsStats.20190221.log is opened
+Total 72 rows are ignored due to error or 0 values
+File SudsStats.20190225.log is opened
+Total 5 Suds log files are opened
+created aggregated log2 report
+=======================================================================
+Total Suds Log Files Analyzed: 5
+Log File Version:        version 3  number of file 5
+Log File location: /inet/spIprobe/support/logs
+==================================================
+Cage:        -          Buffer IDs:   3.10.237962 3.10.237896 3.10.237995 3.10.238028 3.10.237929 3.03.209350 3.10.238127 3.10.238094 3.10.238061
+Buffer Type:                    IP         Buffer Size(GB):            1791
+Total record minutes:         6300         Day:Hour                     4:9
+Avg Calls/min                19098         Number of Buffer               9
+Avg Calls/min/buffer          2122
+Total CallPartWrite(MB):     49725         TotalSuPartWrite(MB):     120276
+Avg CallPartWrite/day(MB):   11365         Avg SuPartWrite/day(MB):   27491
+Call Partition Size(GB):       298         Su Partition Size(GB):      1493
+Peak Calls/min:              38861         Peak Calls/min/buffer:      4317
+Peak Time:      2019/02/24 18:03:44        Compression rate              38
+Peak Hour Percentage:           8.3       Number of Busy Hours:         12.0
+Avg Used Root(%) :               54         Avg Used Virtual page (%)     42
+Peak Used Root(%) :             100         Peak Used Virtual page (%):    43
+Set Su2Call Ratio:                5         Rcmd Su2Call:                  3
+Actual Su2Call Ratio:             2.4
+Wasted Disk Space Using Current Su2Call (GB):    778  Percentage:       43
+Wasted Disk Space Using Rcmd Su2Call (GB):       272  Percentage:       15
+Est. days of Suds:              25.2
+Opt. days of Suds:              37.8
+Num Allocation Failure        1260
+All buffer size same:     NO
+call2vmm ratio:                  0.86
+==================================================
+==================================================
+Cage:        -          Buffer IDs:   1.05.86502 1.05.86337 2.01.135596 1.05.86469 2.02.139832 1.05.86568 1.05.86370 2.01.135695 2.02.139667 1.05.86535 2.02.139634 2.01.135530 2.11.176482 3.03.209317 3.03.209284 1.04.82488 1.03.78319 1.03.78220 3.11.242003 1.04.82290 1.03.78153 1.03.78187 1.04.82356 1.05.86436 3.11.242135 3.02.205170 3.02.205302 3.02.205269 3.02.205137 3.02.205236 3.01.201034 2.03.143748 2.03.143847 2.03.143814 2.03.143781 3.01.201168 1.05.86403 2.03.143714 2.02.139700 3.01.201135 2.02.139733 3.11.242102 3.03.209250 3.01.201069 2.03.143681 1.04.82422 1.02.74115 1.02.74049 3.03.209217 3.11.242168 1.02.74280 1.02.74082 1.02.74247 1.02.74148 1.02.74181 2.02.139601 2.01.135497 2.01.135728 2.01.135629 2.03.143880 2.02.139799 2.01.135563 2.02.139766 2.11.176449 2.11.176515 2.11.176548 1.03.78253 1.04.82257 1.04.82455 1.04.82389 1.04.82323 3.11.242036 3.11.242069 3.02.205203 3.01.201102 2.01.135662 1.03.78286
+Buffer Type:                   All         Buffer Size(GB):           18696
+Total record minutes:         6300         Day:Hour                     4:9
+Avg Calls/min                91168         Number of Buffer              77
+Avg Calls/min/buffer          1184
+Total CallPartWrite(MB):    203439         TotalSuPartWrite(MB):     695802
+Avg CallPartWrite/day(MB):   46500         Avg SuPartWrite/day(MB):  159040
+Call Partition Size(GB):      3739         Su Partition Size(GB):     14957
+Peak Calls/min:             139196         Peak Calls/min/buffer:      1807
+Peak Time:      2019/02/24 12:18:44        Compression rate              39
+Peak Hour Percentage:           6.1       Number of Busy Hours:         16.3
+Avg Used Root(%) :               81         Avg Used Virtual page (%)     34
+Peak Used Root(%) :             100         Peak Used Virtual page (%):   100
+Set Su2Call Ratio:                4         Rcmd Su2Call:                  4
+Actual Su2Call Ratio:             3.4
+Wasted Disk Space Using Current Su2Call (GB):   2245  Percentage:       12
+Wasted Disk Space Using Rcmd Su2Call (GB):      2245  Percentage:       12
+Est. days of Suds:              77.1
+Opt. days of Suds:              77.1
+Num Allocation Failure     1769460
+All buffer size same:     NO
+call2vmm ratio:                  0.26
+==================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-----------------------
+7# Dump port | grep -i unknown for Hosary-damascus-1-1
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 0 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 1 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 2 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 3 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 4 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 5 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 6 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=1769        SLC= 7 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0730        SLC= 0 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0730        SLC= 1 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0730        SLC= 2 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0730        SLC= 3 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0755        SLC= 0 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0755        SLC= 1 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0755        SLC= 2 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0755        SLC= 3 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 0 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 1 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 2 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 3 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 4 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0142        SLC= 0 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0142        SLC= 1 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0142        SLC= 2 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0142        SLC= 3 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0212        SLC= 0 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0212        SLC= 1 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0212        SLC= 2 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0212        SLC= 3 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0354        SLC= 0 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0354        SLC= 1 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0354        SLC= 2 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=0354        SLC= 3 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 5 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 6 Unknown
+  ID 0         : NI1=3 PC1=0200        NI2=3 PC2=2216        SLC= 7 Unknown
+-----------------------
+8# Dump port | grep -i unassign for Hosary-damascus-1-1
+The Contents of the Unassigned Table:
+The Contents of the Unassigned IP Table:
+----None UnAssigned AssociationID ----
+-----------------------
+-----------------------

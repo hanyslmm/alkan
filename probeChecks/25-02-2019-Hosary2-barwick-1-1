@@ -1,0 +1,128 @@
+geo@Hosary2-barwick-1-1: ~/dailyChecks $ cat 25-02-2019-Hosary2-barwick-1-1
+1# check file system efficiency
+-----------------------
+Filesystem            Size  Used Avail Use% Mounted on
+rootfs                7.3G  2.9G  4.0G  43% /
+/dev/sda2             7.3G  2.9G  4.0G  43% /
+none                   10M  224K  9.8M   3% /dev
+none                  5.5G  8.0K  5.5G   1% /tmp
+none                  5.5G   84K  5.5G   1% /local-blade
+none                  5.5G   20K  5.5G   1% /mnt/initramfs
+tmpfs                 5.5G     0  5.5G   0% /lib/init/rw
+tmpfs                 5.5G     0  5.5G   0% /dev/shm
+/dev/sda3              30G   12G   16G  43% /.dfs
+/dev/sda3              30G   12G   16G  43% /inet
+/dev/sda6              31G  6.8G   23G  24% /SimScsi
+-----------------------
+2# uptime for Hosary2-barwick-1-1
+ 11:00:11 up 67 days, 22:50,  1 user,  load average: 0.19, 0.14, 0.14
+-----------------------
+3# check Ocelots stats for Hosary2-barwick-1-1
+
+ADDR     Type     Timing     Project      AllReady
+01.14    Ocelot   Driver-P   ipGbe/ipGbe  UP
+
+-----------------------
+4# show down tasks in probe Hosary2-barwick-1-1
+AppName                    StartTime             Dest Addr                           Ex Up Stat MaxT Left   Pid
+-------------------------- --------------------- ----------------------------------- -- -- ---- ---- ---- -----
+-----------------------
+5# RUN topit command for  Hosary2-barwick-1-1
+ Finding CPU intensive processes.
+BLADE    CPU%  MEM%  Application
+1.10     6     1.9   sudsControl-1-1
+1.1      6     0.0   nfsd
+1.11     6     5.2   sudsControl-1-1
+1.12     4     5.0   sudsControl-1-1
+1.13     6     5.2   sudsControl-1-1
+1.14     3.4   2.0   dcSystemCoord
+1.2      23    0.7   sctpStats
+1.3      30    3.8   umtsCttp-1-3-1
+1.4      25    8.8   ttpCttp-1-4-5
+1.5      24    9.1   ttpCttp-1-5-1
+1.6      41    3.9   umtsCttp-1-6-2
+1.9      28    3.4   umtsCttp-1-9-1
+2.1      35    3.7   umtsCttp-2-1-1
+2.2      43    3.8   umtsCttp-2-2-5
+2.3      102   1.2   sudsControl-2-3
+2.4      2     0.0   nsProxy
+2.5      6     5.3   sudsControlIp-2
+2.6      14    2.3   ImsiTmsiMapper-
+-----------------------
+6# RUN suds log analyzer for Hosary2-barwick-1-1
+Starting SUDS log file analyzer.......
+Creating Suds Log Report........
+Total 96 rows are ignored due to error or 0 values
+File SudsStats.20190223.log is opened
+Total 36 rows are ignored due to error or 0 values
+File SudsStats.20190225.log is opened
+Total 96 rows are ignored due to error or 0 values
+File SudsStats.20190221.log is opened
+Total 96 rows are ignored due to error or 0 values
+File SudsStats.20190224.log is opened
+Total 96 rows are ignored due to error or 0 values
+File SudsStats.20190222.log is opened
+Total 5 Suds log files are opened
+created aggregated log2 report
+=======================================================================
+Total Suds Log Files Analyzed: 5
+Log File Version:        version 3  number of file 5
+Log File location: /inet/spIprobe/support/logs
+==================================================
+Cage:        -          Buffer IDs:   2.05.152012 2.05.152045 2.05.152078
+Buffer Type:                    IP         Buffer Size(GB):            1155
+Total record minutes:         6300         Day:Hour                     4:9
+Avg Calls/min                32599         Number of Buffer               3
+Avg Calls/min/buffer         10866
+Total CallPartWrite(MB):     97205         TotalSuPartWrite(MB):     210508
+Avg CallPartWrite/day(MB):   22218         Avg SuPartWrite/day(MB):   48116
+Call Partition Size(GB):       288         Su Partition Size(GB):       867
+Peak Calls/min:              65983         Peak Calls/min/buffer:     21994
+Peak Time:      2019/02/21 18:00:23        Compression rate              40
+Peak Hour Percentage:           8.3       Number of Busy Hours:         12.0
+Avg Used Root(%) :               69         Avg Used Virtual page (%)     51
+Peak Used Root(%) :              71         Peak Used Virtual page (%):    51
+Set Su2Call Ratio:                3         Rcmd Su2Call:                  3
+Actual Su2Call Ratio:             2.1
+Wasted Disk Space Using Current Su2Call (GB):    263  Percentage:       22
+Wasted Disk Space Using Rcmd Su2Call (GB):       263  Percentage:       22
+Est. days of Suds:              12.4
+Opt. days of Suds:              12.4
+Num Allocation Failure        7560
+All buffer size same:     YES
+call2vmm ratio:                  1.37
+==================================================
+==================================================
+Cage:        -          Buffer IDs:   2.03.143780 2.03.143879 1.13.119239 2.05.151979 2.05.151913 1.13.119138 1.13.119171 1.10.106817 1.10.106883 1.11.111020 1.11.111053 1.12.115190 1.12.115223 1.12.115256 2.03.143846 2.03.143714 2.03.143747 2.03.143813 1.11.111152 1.13.119305 1.11.110987 1.11.110921 1.10.106850 1.10.107048 1.13.119105 2.05.151880 1.12.115157 1.12.115091 1.12.115058 1.10.106916 1.10.106982 1.13.119272 1.12.115124 2.05.151946 1.10.107015 1.10.106949 1.11.111086 1.13.119204 1.11.111119 1.13.119338 1.12.115025 1.11.110954
+Buffer Type:                   All         Buffer Size(GB):            9545
+Total record minutes:         6300         Day:Hour                     4:9
+Avg Calls/min               463494         Number of Buffer              42
+Avg Calls/min/buffer         11035
+Total CallPartWrite(MB):    768035         TotalSuPartWrite(MB):     1786027
+Avg CallPartWrite/day(MB):  175550         Avg SuPartWrite/day(MB):  408234
+Call Partition Size(GB):      1909         Su Partition Size(GB):      7636
+Peak Calls/min:             863509         Peak Calls/min/buffer:     20559
+Peak Time:      2019/02/24 12:15:23        Compression rate              36
+Peak Hour Percentage:           7.6       Number of Busy Hours:         13.1
+Avg Used Root(%) :               55         Avg Used Virtual page (%)     47
+Peak Used Root(%) :              84         Peak Used Virtual page (%):   100
+Set Su2Call Ratio:                4         Rcmd Su2Call:                  3
+Actual Su2Call Ratio:             2.3
+Wasted Disk Space Using Current Su2Call (GB):   3246  Percentage:       34
+Wasted Disk Space Using Rcmd Su2Call (GB):      1672  Percentage:       17
+Est. days of Suds:              10.4
+Opt. days of Suds:              13.0
+Num Allocation Failure           0
+All buffer size same:     NO
+call2vmm ratio:                  0.39
+==================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-----------------------
+Dump port | grep -i unknown for Hosary2-barwick-1-1
+-----------------------
+Dump port | grep -i unassign for Hosary2-barwick-1-1
+The Contents of the Unassigned Table:
+The Contents of the Unassigned IP Table:
+----None UnAssigned AssociationID ----
+-----------------------
+-----------------------
