@@ -5,7 +5,18 @@ import numpy as np
 import pandas as pd
 
 # read csv file to create DataFrame sheet
-df = pd.read_csv("All RNC Associations.xlsx", skip_blank_lines=False)
-
-
-df1.to_excel("output.xlsx")  # doctest: +SKIP
+df = pd.ExcelFile("All RNC Associations.xlsx", skip_blank_lines=False)
+sheetNames = df.sheet_names
+"""for i in sheetNames:
+    dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name="{}".\
+                                                format(i))
+    row_counter = dfs.shape[0]
+    print (row_counter)
+    print (dfs.describe())
+    # print ("sheet name {}".format(i))
+    #print(dfs["RNC"])"""
+dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name="RNC56")
+firstIP = dfs["RNC"]
+print (dfs.iloc[2:, :10])
+# print ("number of RNCs {}".format(len(sheetNames)))
+# print (dfs["RNC"])
