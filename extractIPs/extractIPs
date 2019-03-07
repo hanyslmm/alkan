@@ -3,6 +3,7 @@
 
 import numpy as np
 import pandas as pd
+import re
 
 # read csv file to create DataFrame sheet
 df = pd.ExcelFile("All RNC Associations.xlsx", skip_blank_lines=False)
@@ -15,8 +16,38 @@ sheetNames = df.sheet_names
     print (dfs.describe())
     # print ("sheet name {}".format(i))
     #print(dfs["RNC"])"""
-dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name="RNC56")
-firstIP = dfs["RNC"]
-print (dfs.iloc[2:, :10])
-# print ("number of RNCs {}".format(len(sheetNames)))
-# print (dfs["RNC"])
+
+for sheet in sheetNames:
+    dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name=sheet)                                   format(sheet))
+    sName = "RNC33"
+    # READ specific excell sheet_name dfs
+    dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name="RNC33")
+    # LIST RNC first column
+    firstIP = dfs["RNC"]
+    # GET column id of primaryIp and secondaryIp
+    primaryIp = dfs.columns.get_loc("RNC")
+    primaryIp = int(primaryIp)
+    secondaryIp = primaryIp + 2
+    # CREATE new DataFrame RNC_name and it's IPs
+    newdf = dfs.iloc[1:, primaryIp:secondaryIp]
+    # GET list of columns header name and print
+    header = list(newdf)
+    print (newdf.columns)
+    # CHANGE columns header name
+    newdf.rename(columns={header[0] : "primaryIp", header[1] : "secondaryIp"},\
+                                                                    inplace=True)
+    print (newdf.columns)
+
+    # TO change column name from RNCNUM to RNC NUM using split
+    rncName = re.split('(\d.*)', sName)
+    # df.to_csv(file_name, sep='\t', encoding='utf-8')
+    rncName = rncName[0] + " " + rncName[1]
+    # ADDING the new column named RNC_Name
+    newdf["RNC_Name"] = rncName
+    print (newdf)
+    # CHANGE columes order
+    cols = newdf.columns.tolist()
+    cols = cols[-1:] + cols[:-1]
+    newdf = newdf[cols]
+    print (newdf)
+    # newdf.to_csv('testtttt.csv')
