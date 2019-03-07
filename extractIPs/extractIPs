@@ -16,15 +16,11 @@ sheetNames = df.sheet_names
     print (dfs.describe())
     # print ("sheet name {}".format(i))
     #print(dfs["RNC"])"""
-
+i = 0
 for sheet in sheetNames:
-    dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name=sheet)                                   format(sheet))
-    sName = "RNC33"
     # READ specific excell sheet_name dfs
-    dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name="RNC33")
-    # LIST RNC first column
-    firstIP = dfs["RNC"]
-    # GET column id of primaryIp and secondaryIp
+    dfs = pd.read_excel("All RNC Associations.xlsx", sheet_name=sheet)
+    # GET column id of primaryIp and secondaryIp+1
     primaryIp = dfs.columns.get_loc("RNC")
     primaryIp = int(primaryIp)
     secondaryIp = primaryIp + 2
@@ -32,22 +28,28 @@ for sheet in sheetNames:
     newdf = dfs.iloc[1:, primaryIp:secondaryIp]
     # GET list of columns header name and print
     header = list(newdf)
-    print (newdf.columns)
     # CHANGE columns header name
     newdf.rename(columns={header[0] : "primaryIp", header[1] : "secondaryIp"},\
                                                                     inplace=True)
-    print (newdf.columns)
-
     # TO change column name from RNCNUM to RNC NUM using split
-    rncName = re.split('(\d.*)', sName)
+    rncName = re.split('(\d.*)', sheet)
     # df.to_csv(file_name, sep='\t', encoding='utf-8')
     rncName = rncName[0] + " " + rncName[1]
     # ADDING the new column named RNC_Name
     newdf["RNC_Name"] = rncName
-    print (newdf)
     # CHANGE columes order
     cols = newdf.columns.tolist()
     cols = cols[-1:] + cols[:-1]
     newdf = newdf[cols]
-    print (newdf)
-    # newdf.to_csv('testtttt.csv')
+    # CREATE empty DataFrame
+    if i == 0:
+        olddf = pd.DataFrame(columns=cols)
+        i = 1
+    olddf = pd.concat([olddf, newdf])
+
+# EXPORT DataFrame to csv and excell
+engine = 'openpyxl'
+olddf.to_csv('extractedIps.csv')
+olddf.to_excel('extractedIps.xlsx', engine=engine)
+print ("Congratulation IPs successfully exported to extractedIps.csv and \
+                                                            extractedIps.xlsx ")
